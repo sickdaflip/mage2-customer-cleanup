@@ -20,8 +20,6 @@
                     </resource>
                     <!-- View cleanup logs -->
                     <resource id="Sickdaflip_CustomerCleanup::cleanup_log" title="View Cleanup Log" sortOrder="20"/>
-                    <!-- Configuration access -->
-                    <resource id="Sickdaflip_CustomerCleanup::config" title="Customer Cleanup Configuration" sortOrder="30"/>
                 </resource>
                 <!-- Add to Stores > Configuration ACL -->
                 <resource id="Magento_Backend::stores">
