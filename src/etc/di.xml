@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Dependency Injection Configuration
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    
+    <!-- Virtual Types for UI Components -->
+    <virtualType name="Sickdaflip\CustomerCleanup\Model\ResourceModel\Customer\Grid\Collection" 
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_entity</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Customer\Model\ResourceModel\Customer</argument>
+        </arguments>
+    </virtualType>
+    
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customercleanup_customer_listing_data_source" xsi:type="string">Sickdaflip\CustomerCleanup\Model\ResourceModel\Customer\Grid\Collection</item>
+                <item name="customercleanup_log_listing_data_source" xsi:type="string">Sickdaflip\CustomerCleanup\Model\ResourceModel\CleanupLog\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <!-- Logger -->
+    <type name="Sickdaflip\CustomerCleanup\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    
+    <type name="Sickdaflip\CustomerCleanup\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">customerCleanup</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Sickdaflip\CustomerCleanup\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

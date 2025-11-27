@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Default Configuration Values
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <customercleanup>
+            <general>
+                <!-- Module is DISABLED by default - must be explicitly enabled -->
+                <enabled>0</enabled>
+                <!-- Dry Run Mode is ENABLED by default for safety -->
+                <dry_run>1</dry_run>
+            </general>
+            <criteria>
+                <!-- Conservative defaults - 2 years inactivity -->
+                <inactive_days>730</inactive_days>
+                <!-- 1 year for accounts without orders -->
+                <no_orders_days>365</no_orders_days>
+                <!-- Minimum 10 years for legal compliance (HGB/AO) -->
+                <last_order_years>10</last_order_years>
+                <never_logged_in>1</never_logged_in>
+            </criteria>
+            <notification>
+                <!-- Email notifications DISABLED by default -->
+                <enabled>0</enabled>
+                <!-- 30 days warning period -->
+                <warning_days>30</warning_days>
+                <sender_email>general</sender_email>
+                <email_template>customercleanup_notification_warning</email_template>
+            </notification>
+            <deletion>
+                <!-- Anonymize orders by default (GDPR compliance) -->
+                <anonymize_orders>1</anonymize_orders>
+                <delete_addresses>1</delete_addresses>
+                <!-- Keep reviews by default -->
+                <delete_reviews>0</delete_reviews>
+            </deletion>
+        </customercleanup>
+    </default>
+</config>

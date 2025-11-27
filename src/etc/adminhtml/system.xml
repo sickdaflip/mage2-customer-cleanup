@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * System Configuration - Admin Settings
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="sickdaflip" translate="label" sortOrder="400">
+            <label>Sickdaflip</label>
+        </tab>
+        <section id="customercleanup" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Customer Cleanup</label>
+            <tab>sickdaflip</tab>
+            <resource>Sickdaflip_CustomerCleanup::config</resource>
+            
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <comment><![CDATA[
+                    <div style="background: #fffacd; border: 2px solid #ffa500; padding: 15px; margin: 10px 0; border-radius: 5px;">
+                        <strong style="color: #ff8c00; font-size: 16px;">⚠️ SAFETY NOTICE</strong><br/>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li><strong>Start with Module DISABLED and Dry Run ENABLED</strong></li>
+                            <li>Test thoroughly on staging environment first</li>
+                            <li>Always backup your database before enabling live mode</li>
+                            <li>Review cleanup logs after dry run operations</li>
+                        </ul>
+                    </div>
+                ]]></comment>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong style="color: #dc3545;">⚠️ WARNING:</strong> When enabled, cleanup operations can be performed. Keep DISABLED until you've tested thoroughly!]]></comment>
+                </field>
+                <field id="dry_run" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Dry Run Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong style="color: #28a745;">🔒 RECOMMENDED:</strong> When enabled, no actual deletions or emails occur - only logging. <strong>Keep this ENABLED for testing!</strong>]]></comment>
+                </field>
+            </group>
+            
+            <group id="criteria" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cleanup Criteria</label>
+                <field id="inactive_days" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Days Since Last Login</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment>Consider customers inactive after X days without login (0 = disabled)</comment>
+                </field>
+                <field id="no_orders_days" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Days Since Account Creation (No Orders)</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment>Delete customers who registered but never ordered after X days (0 = disabled)</comment>
+                </field>
+                <field id="last_order_years" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Years Since Last Order</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment>Consider customers with last order older than X years (minimum 10 for legal compliance, 0 = disabled)</comment>
+                </field>
+                <field id="never_logged_in" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include Never Logged In</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Include customers who created account but never logged in</comment>
+                </field>
+            </group>
+            
+            <group id="notification" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Notification Settings</label>
+                <comment><![CDATA[
+                    <div style="background: #e3f2fd; border: 2px solid #2196f3; padding: 10px; margin: 10px 0; border-radius: 5px;">
+                        <strong style="color: #1976d2;">📧 Email Notifications</strong><br/>
+                        These settings control warning emails sent to customers before deletion.<br/>
+                        <strong>In Dry Run Mode:</strong> No actual emails are sent, only logged.
+                    </div>
+                ]]></comment>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Email Notifications</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Send warning emails before deletion (respects Dry Run Mode)</comment>
+                </field>
+                <field id="warning_days" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Warning Period (Days)</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment>Send warning email X days before scheduled deletion</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="sender_email" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="email_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment><![CDATA[Email template for deletion warning. Default: customercleanup_notification_warning]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            
+            <group id="deletion" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Deletion Settings</label>
+                <field id="anonymize_orders" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Anonymize Instead of Delete Orders</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Anonymize customer data in orders instead of deleting (recommended for legal compliance)</comment>
+                </field>
+                <field id="delete_addresses" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delete Customer Addresses</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="delete_reviews" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delete Customer Reviews</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

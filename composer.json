@@ -1,0 +1,59 @@
+{
+    "name": "sickdaflip/module-customercleanup",
+    "description": "GDPR/DSGVO compliant customer data cleanup module for Magento 2.4.8. Safely manage inactive customers with dry-run mode, email notifications, and comprehensive audit logging.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "keywords": [
+        "magento2",
+        "gdpr",
+        "dsgvo",
+        "customer cleanup",
+        "data privacy",
+        "right to be forgotten",
+        "customer management",
+        "data protection",
+        "magento module"
+    ],
+    "authors": [
+        {
+            "name": "Sickdaflip",
+            "email": "info@example.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@example.com",
+        "issues": "https://github.com/sickdaflip/module-customercleanup/issues"
+    },
+    "require": {
+        "php": "^8.4",
+        "magento/framework": ">=103.0.6",
+        "magento/module-customer": ">=103.0.6",
+        "magento/module-sales": ">=103.0.6",
+        "magento/module-backend": ">=102.0.6",
+        "magento/module-store": ">=101.1.6",
+        "magento/module-config": ">=101.2.6"
+    },
+    "suggest": {
+        "magento/module-email": "For email notification functionality"
+    },
+    "autoload": {
+        "files": [
+            "src/registration.php"
+        ],
+        "psr-4": {
+            "Sickdaflip\\CustomerCleanup\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "magento/*": true
+        }
+    },
+    "extra": {
+        "magento-root-dir": "../../../",
+        "magento-force": true
+    }
+}

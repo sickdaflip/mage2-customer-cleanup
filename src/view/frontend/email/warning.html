@@ -1,0 +1,75 @@
+<!--
+/**
+ * Account Deletion Warning Email Template
+ * @var $customer \Magento\Customer\Model\Customer
+ * @var $days int
+ */
+-->
+<!--@subject Account Deletion Notice - Action Required @-->
+<!--@vars {
+    "var customer.name": "Customer Name",
+    "var customer.email": "Customer Email",
+    "var days": "Days until deletion",
+    "var store.frontend_name": "Store Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello %name," name=$customer.name}}</p>
+            <p>
+                {{trans "We're writing to inform you that your account with %store_name is scheduled for deletion." store_name=$store.frontend_name}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <p>
+                {{trans "Due to inactivity, your account will be permanently deleted in %days days unless you take action." days=$days}}
+            </p>
+            <p>
+                <strong>{{trans "What happens when your account is deleted:"}}</strong>
+            </p>
+            <ul>
+                <li>{{trans "Your personal information will be removed from our system"}}</li>
+                <li>{{trans "You will no longer be able to access your order history"}}</li>
+                <li>{{trans "Any stored addresses and preferences will be lost"}}</li>
+            </ul>
+            <p>
+                <strong>{{trans "How to prevent deletion:"}}</strong>
+            </p>
+            <p>
+                {{trans "Simply log into your account within the next %days days to keep it active." days=$days}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-action">
+        <td>
+            <table class="action-button">
+                <tr>
+                    <td class="button-td">
+                        <a href="{{store url="customer/account/login"}}" class="action-button-link">
+                            {{trans "Log In to Your Account"}}
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>
+                {{trans "If you have any questions or believe this is an error, please contact our customer support team."}}
+            </p>
+            <p>
+                {{trans "Thank you,"}}
+                <br/>
+                {{var store.frontend_name}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

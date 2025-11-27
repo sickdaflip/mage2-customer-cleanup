@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Customer Cleanup Grid UI Component
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">customercleanup_customer_listing.customercleanup_customer_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="adminhtml/system_config/edit/section/customercleanup"/>
+                <class>primary</class>
+                <label translate="true">Configure Cleanup Rules</label>
+            </button>
+        </buttons>
+        <spinner>customercleanup_customer_columns</spinner>
+        <deps>
+            <dep>customercleanup_customer_listing.customercleanup_customer_listing_data_source</dep>
+        </deps>
+    </settings>
+    
+    <dataSource name="customercleanup_customer_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Sickdaflip_CustomerCleanup::cleanup_view</aclResource>
+        <dataProvider class="Magento\Customer\Ui\Component\DataProvider" name="customercleanup_customer_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="notify">
+                <settings>
+                    <confirm>
+                        <message translate="true">Send deletion warning emails to selected customers?</message>
+                        <title translate="true">Send Warning Emails</title>
+                    </confirm>
+                    <url path="customercleanup/customer/massNotify"/>
+                    <type>notify</type>
+                    <label translate="true">Send Warning Email</label>
+                </settings>
+            </action>
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected customers? This action cannot be undone!</message>
+                        <title translate="true">Delete Customers</title>
+                    </confirm>
+                    <url path="customercleanup/customer/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    
+    <columns name="customercleanup_customer_columns">
+        <settings>
+            <editorConfig>
+                <param name="enabled" xsi:type="boolean">false</param>
+            </editorConfig>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        
+        <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        
+        <column name="name" class="Magento\Customer\Ui\Component\Listing\Column\FullName">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        
+        <column name="email">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Email</label>
+            </settings>
+        </column>
+        
+        <column name="group_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Magento\Customer\Ui\Component\Listing\Column\Group\Options"/>
+                <dataType>select</dataType>
+                <label translate="true">Group</label>
+            </settings>
+        </column>
+        
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Customer Since</label>
+            </settings>
+        </column>
+        
+        <column name="website_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
+            <settings>
+                <filter>select</filter>
+                <options class="Magento\Store\Model\ResourceModel\Website\Collection"/>
+                <dataType>select</dataType>
+                <label translate="true">Website</label>
+            </settings>
+        </column>
+        
+        <column name="confirmation" class="Magento\Customer\Ui\Component\Listing\Column\Confirmation">
+            <settings>
+                <filter>select</filter>
+                <options class="Magento\Customer\Ui\Component\Listing\Column\Confirmation\Options"/>
+                <dataType>select</dataType>
+                <label translate="true">Confirmed email</label>
+            </settings>
+        </column>
+        
+        <actionsColumn name="actions" class="Magento\Customer\Ui\Component\Listing\Column\Actions">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

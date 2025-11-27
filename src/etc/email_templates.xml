@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Email Templates Configuration
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="customercleanup_notification_warning" label="Customer Cleanup - Account Deletion Warning" file="warning.html" type="html" module="Sickdaflip_CustomerCleanup" area="frontend"/>
+</config>

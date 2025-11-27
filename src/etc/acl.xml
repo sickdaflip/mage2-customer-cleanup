@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * ACL Configuration - Admin Permissions
+ * Defines who can access customer cleanup features
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <!-- Main Customer Cleanup Menu -->
+                <resource id="Sickdaflip_CustomerCleanup::customercleanup" title="Customer Cleanup" sortOrder="100">
+                    <!-- View and manage inactive customers -->
+                    <resource id="Sickdaflip_CustomerCleanup::cleanup" title="Manage Customer Cleanup" sortOrder="10">
+                        <resource id="Sickdaflip_CustomerCleanup::cleanup_view" title="View Inactive Customers" sortOrder="10"/>
+                        <resource id="Sickdaflip_CustomerCleanup::cleanup_delete" title="Delete Customers" sortOrder="20"/>
+                        <resource id="Sickdaflip_CustomerCleanup::cleanup_notify" title="Send Notifications" sortOrder="30"/>
+                    </resource>
+                    <!-- View cleanup logs -->
+                    <resource id="Sickdaflip_CustomerCleanup::cleanup_log" title="View Cleanup Log" sortOrder="20"/>
+                    <!-- Configuration access -->
+                    <resource id="Sickdaflip_CustomerCleanup::config" title="Customer Cleanup Configuration" sortOrder="30"/>
+                </resource>
+                <!-- Add to Stores > Configuration ACL -->
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Sickdaflip_CustomerCleanup::config" title="Customer Cleanup Section"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

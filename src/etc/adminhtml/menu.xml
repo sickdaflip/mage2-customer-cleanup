@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Admin Menu Configuration
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Sickdaflip_CustomerCleanup::customercleanup"
+             title="Customer Cleanup"
+             module="Sickdaflip_CustomerCleanup"
+             sortOrder="100"
+             resource="Sickdaflip_CustomerCleanup::customercleanup"/>
+        <add id="Sickdaflip_CustomerCleanup::inactive_customers"
+             title="Inactive Customers"
+             module="Sickdaflip_CustomerCleanup"
+             sortOrder="10"
+             parent="Sickdaflip_CustomerCleanup::customercleanup"
+             action="customercleanup/customer/index"
+             resource="Sickdaflip_CustomerCleanup::cleanup_view"/>
+        <add id="Sickdaflip_CustomerCleanup::cleanup_log"
+             title="Cleanup Log"
+             module="Sickdaflip_CustomerCleanup"
+             sortOrder="20"
+             parent="Sickdaflip_CustomerCleanup::customercleanup"
+             action="customercleanup/log/index"
+             resource="Sickdaflip_CustomerCleanup::cleanup_log"/>
+        <add id="Sickdaflip_CustomerCleanup::configuration"
+             title="Configuration"
+             module="Sickdaflip_CustomerCleanup"
+             sortOrder="30"
+             parent="Sickdaflip_CustomerCleanup::customercleanup"
+             action="adminhtml/system_config/edit/section/customercleanup"
+             resource="Sickdaflip_CustomerCleanup::config"/>
+    </menu>
+</config>

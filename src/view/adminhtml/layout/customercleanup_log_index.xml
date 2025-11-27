@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cleanup Log Layout
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <body>
+        <referenceContainer name="content">
+            <!-- Status Banner showing module mode -->
+            <block class="Sickdaflip\CustomerCleanup\Block\Adminhtml\StatusBanner" 
+                   name="customercleanup.status.banner" 
+                   template="Sickdaflip_CustomerCleanup::status_banner.phtml"
+                   before="-"/>
+            <uiComponent name="customercleanup_log_listing"/>
+        </referenceContainer>
+    </body>
+</page>

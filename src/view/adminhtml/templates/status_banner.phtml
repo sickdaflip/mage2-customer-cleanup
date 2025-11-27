@@ -1,0 +1,98 @@
+<?php
+/**
+ * Status Banner Template
+ * @var $block \Sickdaflip\CustomerCleanup\Block\Adminhtml\StatusBanner
+ */
+?>
+<style>
+    .customercleanup-status-banner {
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        border: 3px solid;
+    }
+    .customercleanup-status-banner.disabled {
+        background-color: #f0f0f0;
+        border-color: #999;
+        color: #666;
+    }
+    .customercleanup-status-banner.safe {
+        background-color: #fffacd;
+        border-color: #ffa500;
+        color: #ff8c00;
+    }
+    .customercleanup-status-banner.danger {
+        background-color: #ffe4e4;
+        border-color: #dc3545;
+        color: #dc3545;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+    .customercleanup-status-icon {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+    .customercleanup-config-link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 15px;
+        background: white;
+        border: 2px solid currentColor;
+        border-radius: 4px;
+        color: inherit;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .customercleanup-config-link:hover {
+        text-decoration: none;
+        opacity: 0.8;
+    }
+    .customercleanup-details {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: normal;
+    }
+</style>
+
+<div class="customercleanup-status-banner <?= $block->escapeHtmlAttr($block->getStatusType()) ?>">
+    <span class="customercleanup-status-icon">
+        <?php if (!$block->isModuleEnabled()): ?>
+            🔒
+        <?php elseif ($block->isDryRunMode()): ?>
+            🧪
+        <?php else: ?>
+            ⚠️
+        <?php endif; ?>
+    </span>
+    
+    <span class="customercleanup-status-message">
+        <?= $block->escapeHtml($block->getStatusMessage()) ?>
+    </span>
+
+    <div class="customercleanup-details">
+        <?php if (!$block->isModuleEnabled()): ?>
+            <?= __('To start using Customer Cleanup, enable the module in configuration.') ?>
+        <?php elseif ($block->isDryRunMode()): ?>
+            <?= __('Safe for testing! Review logs after operations to see what would happen.') ?>
+            <?php if (!$block->isNotificationEnabled()): ?>
+                <br><?= __('⚠️ Email notifications are also DISABLED') ?>
+            <?php endif; ?>
+        <?php else: ?>
+            <?= __('⚠️ CAUTION: Operations will permanently delete or modify customer data!') ?>
+            <br><?= __('Make sure you have a recent backup before proceeding!') ?>
+            <?php if ($block->isNotificationEnabled()): ?>
+                <br><?= __('📧 Email notifications are ENABLED - Customers will receive emails') ?>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+
+    <a href="<?= $block->escapeUrl($block->getConfigUrl()) ?>" class="customercleanup-config-link">
+        ⚙️ <?= __('Configure Module Settings') ?>
+    </a>
+</div>
