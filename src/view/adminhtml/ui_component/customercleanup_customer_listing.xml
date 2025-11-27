@@ -33,7 +33,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Sickdaflip_CustomerCleanup::cleanup_view</aclResource>
-        <dataProvider class="Magento\Customer\Ui\Component\DataProvider" name="customercleanup_customer_listing_data_source">
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="customercleanup_customer_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>entity_id</primaryFieldName>
@@ -155,11 +155,5 @@
                 <label translate="true">Confirmed email</label>
             </settings>
         </column>
-        
-        <actionsColumn name="actions" class="Magento\Customer\Ui\Component\Listing\Column\Actions">
-            <settings>
-                <indexField>entity_id</indexField>
-            </settings>
-        </actionsColumn>
     </columns>
 </listing>
