@@ -77,9 +77,9 @@ class StatusBanner extends Template
     /**
      * Get status message
      *
-     * @return string
+     * @return \Magento\Framework\Phrase
      */
-    public function getStatusMessage(): string
+    public function getStatusMessage(): \Magento\Framework\Phrase
     {
         if (!$this->isModuleEnabled()) {
             return __('Module is DISABLED - No cleanup operations will be performed');
