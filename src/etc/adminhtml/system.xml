@@ -93,9 +93,10 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="email_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="email_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Email Template</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Email\Template</backend_model>
                     <comment><![CDATA[Email template for deletion warning. Default: customercleanup_notification_warning]]></comment>
                     <depends>
                         <field id="enabled">1</field>
