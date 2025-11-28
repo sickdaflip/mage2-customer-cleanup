@@ -8,19 +8,27 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     
     <!-- Virtual Types for UI Components -->
-    <virtualType name="Sickdaflip\CustomerCleanup\Model\ResourceModel\Customer\Grid\Collection" 
+    <virtualType name="Sickdaflip\CustomerCleanup\Model\ResourceModel\Customer\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">customer_entity</argument>
             <argument name="resourceModel" xsi:type="string">Magento\Customer\Model\ResourceModel\Customer</argument>
         </arguments>
     </virtualType>
-    
+
+    <virtualType name="Sickdaflip\CustomerCleanup\Model\ResourceModel\CleanupLog\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sickdaflip_customer_cleanup_log</argument>
+            <argument name="resourceModel" xsi:type="string">Sickdaflip\CustomerCleanup\Model\ResourceModel\CleanupLog</argument>
+        </arguments>
+    </virtualType>
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="customercleanup_customer_listing_data_source" xsi:type="string">Sickdaflip\CustomerCleanup\Model\ResourceModel\Customer\Grid\Collection</item>
-                <item name="customercleanup_log_listing_data_source" xsi:type="string">Sickdaflip\CustomerCleanup\Model\ResourceModel\CleanupLog\Collection</item>
+                <item name="customercleanup_log_listing_data_source" xsi:type="string">Sickdaflip\CustomerCleanup\Model\ResourceModel\CleanupLog\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
