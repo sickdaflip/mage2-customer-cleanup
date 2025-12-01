@@ -103,7 +103,7 @@ class CustomerCleanupService
      */
     public function cleanupCustomer(CustomerInterface $customer, string $reason, ?string $adminUser = null): bool
     {
-        $customerId = $customer->getId();
+        $customerId = (int)$customer->getId();
         $customerEmail = $customer->getEmail();
         $customerName = $customer->getFirstname() . ' ' . $customer->getLastname();
         $isDryRun = $this->config->isDryRunMode();
@@ -256,7 +256,7 @@ class CustomerCleanupService
             $this->logger->info(sprintf(
                 '[%s] Notification sent to customer %d (%s) - %d days until deletion',
                 $isDryRun ? 'DRY RUN' : 'LIVE',
-                $customer->getId(),
+                (int)$customer->getId(),
                 $customer->getEmail(),
                 $daysUntilDeletion
             ));
@@ -266,7 +266,7 @@ class CustomerCleanupService
         } catch (\Exception $e) {
             $this->logger->error(sprintf(
                 'Failed to send notification to customer %d (%s): %s',
-                $customer->getId(),
+                (int)$customer->getId(),
                 $customer->getEmail(),
                 $e->getMessage()
             ));
