@@ -5,11 +5,12 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Helper;
+namespace FlipDev\CustomerCleanup\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Store\Model\ScopeInterface;
+use FlipDev\Core\Helper\Config as CoreConfig;
 
 class Config extends AbstractHelper
 {
@@ -29,18 +30,54 @@ class Config extends AbstractHelper
     const XML_PATH_DELETE_REVIEWS = 'customercleanup/deletion/delete_reviews';
 
     /**
+     * @var CoreConfig
+     */
+    private $coreConfig;
+
+    /**
+     * Constructor
+     *
+     * @param Context $context
+     * @param CoreConfig $coreConfig
+     */
+    public function __construct(
+        Context $context,
+        CoreConfig $coreConfig
+    ) {
+        parent::__construct($context);
+        $this->coreConfig = $coreConfig;
+    }
+
+    /**
      * Check if module is enabled
+     * Also checks if FlipDev_Core is enabled
      *
      * @param int|null $storeId
      * @return bool
      */
     public function isEnabled(?int $storeId = null): bool
     {
+        // First check if FlipDev Core is enabled
+        if (!$this->coreConfig->isEnabled($storeId)) {
+            return false;
+        }
+
         return $this->scopeConfig->isSetFlag(
             self::XML_PATH_ENABLED,
             ScopeInterface::SCOPE_STORE,
             $storeId
         );
+    }
+
+    /**
+     * Check if debug mode is enabled (from FlipDev_Core)
+     *
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isDebugMode(?int $storeId = null): bool
+    {
+        return $this->coreConfig->isDebugMode($storeId);
     }
 
     /**

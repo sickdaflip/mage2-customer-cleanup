@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Setup;
+namespace FlipDev\CustomerCleanup\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;

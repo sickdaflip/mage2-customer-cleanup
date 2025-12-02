@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Model\ResourceModel;
+namespace FlipDev\CustomerCleanup\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 

@@ -5,10 +5,10 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Model;
+namespace FlipDev\CustomerCleanup\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use Sickdaflip\CustomerCleanup\Api\Data\CleanupLogInterface;
+use FlipDev\CustomerCleanup\Api\Data\CleanupLogInterface;
 
 class CleanupLog extends AbstractModel implements CleanupLogInterface
 {

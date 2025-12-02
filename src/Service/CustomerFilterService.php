@@ -5,12 +5,12 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Service;
+namespace FlipDev\CustomerCleanup\Service;
 
 use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory as CustomerCollectionFactory;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory as OrderCollectionFactory;
 use Magento\Framework\Stdlib\DateTime\DateTime;
-use Sickdaflip\CustomerCleanup\Helper\Config;
+use FlipDev\CustomerCleanup\Helper\Config;
 
 class CustomerFilterService
 {

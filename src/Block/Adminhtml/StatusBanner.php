@@ -5,11 +5,11 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Block\Adminhtml;
+namespace FlipDev\CustomerCleanup\Block\Adminhtml;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
-use Sickdaflip\CustomerCleanup\Helper\Config;
+use FlipDev\CustomerCleanup\Helper\Config;
 
 class StatusBanner extends Template
 {
