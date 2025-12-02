@@ -1,5 +1,7 @@
 # Sickdaflip_CustomerCleanup
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e592ac2d73764d74b97d4267eee973dd)](https://app.codacy.com/gh/sickdaflip/mage2-customercleanup?utm_source=github.com&utm_medium=referral&utm_content=sickdaflip/mage2-customercleanup&utm_campaign=Badge_Grade)
+
 Magento 2.4.8 module for GDPR/DSGVO-compliant customer data cleanup. Helps merchants manage inactive customers and fulfill the "right to be forgotten" obligations.
 
 > **📦 Module Structure**: This module follows modern PHP package structure with source code in `src/` directory and PSR-4 autoloading.
