@@ -5,14 +5,14 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Service;
+namespace FlipDev\CustomerCleanup\Service;
 
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Sickdaflip\CustomerCleanup\Helper\Config;
-use Sickdaflip\CustomerCleanup\Logger\Logger;
+use FlipDev\CustomerCleanup\Helper\Config;
+use FlipDev\Core\Logger\Logger;
 
 class NotificationService
 {
@@ -105,7 +105,16 @@ class NotificationService
             return true;
 
         } catch (\Exception $e) {
-            $this->logger->error('Failed to send warning email: ' . $e->getMessage());
+            $this->logger->logWithModule(
+                'error',
+                'FlipDev_CustomerCleanup',
+                'Failed to send warning email: ' . $e->getMessage(),
+                [
+                    'customer_id' => $customer->getId(),
+                    'customer_email' => $customer->getEmail(),
+                    'exception' => get_class($e)
+                ]
+            );
             $this->inlineTranslation->resume();
             return false;
         }

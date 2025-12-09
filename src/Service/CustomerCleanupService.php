@@ -5,17 +5,17 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Service;
+namespace FlipDev\CustomerCleanup\Service;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory as OrderCollectionFactory;
-use Sickdaflip\CustomerCleanup\Helper\Config;
-use Sickdaflip\CustomerCleanup\Logger\Logger;
-use Sickdaflip\CustomerCleanup\Model\CleanupLog;
-use Sickdaflip\CustomerCleanup\Model\CleanupLogFactory;
+use FlipDev\CustomerCleanup\Helper\Config;
+use FlipDev\Core\Logger\Logger;
+use FlipDev\CustomerCleanup\Model\CleanupLog;
+use FlipDev\CustomerCleanup\Model\CleanupLogFactory;
 use Magento\Framework\Registry;
 
 class CustomerCleanupService
@@ -110,13 +110,18 @@ class CustomerCleanupService
 
         try {
             // Log the operation
-            $this->logger->info(sprintf(
-                '[%s] Processing customer %d (%s) - Reason: %s',
-                $isDryRun ? 'DRY RUN' : 'LIVE',
-                $customerId,
-                $customerEmail,
-                $reason
-            ));
+            if ($this->config->isDebugMode()) {
+                $this->logger->logWithModule(
+                    'info',
+                    'FlipDev_CustomerCleanup',
+                    sprintf('[%s] Processing customer', $isDryRun ? 'DRY RUN' : 'LIVE'),
+                    [
+                        'customer_id' => $customerId,
+                        'customer_email' => $customerEmail,
+                        'reason' => $reason
+                    ]
+                );
+            }
 
             if (!$isDryRun) {
                 // Check if customer has orders
@@ -141,12 +146,16 @@ class CustomerCleanupService
                 // Unset registry flag
                 $this->registry->unregister('isSecureArea');
 
-                $this->logger->info(sprintf(
-                    'Customer %d (%s) successfully %s',
-                    $customerId,
-                    $customerEmail,
-                    $actionType === CleanupLog::ACTION_ANONYMIZED ? 'anonymized' : 'deleted'
-                ));
+                $this->logger->logWithModule(
+                    'info',
+                    'FlipDev_CustomerCleanup',
+                    sprintf('Customer successfully %s', $actionType === CleanupLog::ACTION_ANONYMIZED ? 'anonymized' : 'deleted'),
+                    [
+                        'customer_id' => $customerId,
+                        'customer_email' => $customerEmail,
+                        'action' => $actionType
+                    ]
+                );
             } else {
                 $actionType = CleanupLog::ACTION_DELETED;
             }
@@ -165,12 +174,17 @@ class CustomerCleanupService
             return true;
 
         } catch (\Exception $e) {
-            $this->logger->error(sprintf(
-                'Error cleaning up customer %d (%s): %s',
-                $customerId,
-                $customerEmail,
-                $e->getMessage()
-            ));
+            $this->logger->logWithModule(
+                'error',
+                'FlipDev_CustomerCleanup',
+                'Error cleaning up customer: ' . $e->getMessage(),
+                [
+                    'customer_id' => $customerId,
+                    'customer_email' => $customerEmail,
+                    'exception' => get_class($e),
+                    'trace' => $e->getTraceAsString()
+                ]
+            );
             throw new LocalizedException(__('Failed to cleanup customer: %1', $e->getMessage()));
         }
     }
@@ -215,11 +229,17 @@ class CustomerCleanupService
             $this->orderRepository->save($order);
         }
 
-        $this->logger->info(sprintf(
-            'Anonymized %d orders for customer %d',
-            $orderCollection->getSize(),
-            $customerId
-        ));
+        if ($this->config->isDebugMode()) {
+            $this->logger->logWithModule(
+                'info',
+                'FlipDev_CustomerCleanup',
+                'Anonymized orders for customer',
+                [
+                    'customer_id' => $customerId,
+                    'order_count' => $orderCollection->getSize()
+                ]
+            );
+        }
     }
 
     /**
@@ -253,23 +273,32 @@ class CustomerCleanupService
                 null
             );
 
-            $this->logger->info(sprintf(
-                '[%s] Notification sent to customer %d (%s) - %d days until deletion',
-                $isDryRun ? 'DRY RUN' : 'LIVE',
-                $customer->getId(),
-                $customer->getEmail(),
-                $daysUntilDeletion
-            ));
+            if ($this->config->isDebugMode()) {
+                $this->logger->logWithModule(
+                    'info',
+                    'FlipDev_CustomerCleanup',
+                    sprintf('[%s] Notification sent to customer', $isDryRun ? 'DRY RUN' : 'LIVE'),
+                    [
+                        'customer_id' => $customer->getId(),
+                        'customer_email' => $customer->getEmail(),
+                        'days_until_deletion' => $daysUntilDeletion
+                    ]
+                );
+            }
 
             return true;
 
         } catch (\Exception $e) {
-            $this->logger->error(sprintf(
-                'Failed to send notification to customer %d (%s): %s',
-                $customer->getId(),
-                $customer->getEmail(),
-                $e->getMessage()
-            ));
+            $this->logger->logWithModule(
+                'error',
+                'FlipDev_CustomerCleanup',
+                'Failed to send notification to customer: ' . $e->getMessage(),
+                [
+                    'customer_id' => $customer->getId(),
+                    'customer_email' => $customer->getEmail(),
+                    'exception' => get_class($e)
+                ]
+            );
             return false;
         }
     }
@@ -308,7 +337,16 @@ class CustomerCleanupService
             }
             $log->save();
         } catch (\Exception $e) {
-            $this->logger->error('Failed to create log entry: ' . $e->getMessage());
+            $this->logger->logWithModule(
+                'error',
+                'FlipDev_CustomerCleanup',
+                'Failed to create log entry: ' . $e->getMessage(),
+                [
+                    'customer_id' => $customerId,
+                    'customer_email' => $email,
+                    'exception' => get_class($e)
+                ]
+            );
         }
     }
 }

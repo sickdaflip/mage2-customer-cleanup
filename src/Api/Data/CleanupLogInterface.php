@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Api\Data;
+namespace FlipDev\CustomerCleanup\Api\Data;
 
 interface CleanupLogInterface
 {

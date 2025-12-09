@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Controller\Adminhtml\Customer;
+namespace FlipDev\CustomerCleanup\Controller\Adminhtml\Customer;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -13,8 +13,8 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Ui\Component\MassAction\Filter;
 use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory;
-use Sickdaflip\CustomerCleanup\Service\CustomerCleanupService;
-use Sickdaflip\CustomerCleanup\Helper\Config;
+use FlipDev\CustomerCleanup\Service\CustomerCleanupService;
+use FlipDev\CustomerCleanup\Helper\Config;
 
 class MassNotify extends Action
 {

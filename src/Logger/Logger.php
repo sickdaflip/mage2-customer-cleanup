@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Logger;
+namespace FlipDev\CustomerCleanup\Logger;
 
 use Monolog\Logger as MonologLogger;
 

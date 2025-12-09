@@ -5,11 +5,11 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Model\ResourceModel\CleanupLog;
+namespace FlipDev\CustomerCleanup\Model\ResourceModel\CleanupLog;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use Sickdaflip\CustomerCleanup\Model\CleanupLog;
-use Sickdaflip\CustomerCleanup\Model\ResourceModel\CleanupLog as CleanupLogResource;
+use FlipDev\CustomerCleanup\Model\CleanupLog;
+use FlipDev\CustomerCleanup\Model\ResourceModel\CleanupLog as CleanupLogResource;
 
 class Collection extends AbstractCollection
 {

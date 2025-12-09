@@ -8,7 +8,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
         <route id="customercleanup" frontName="customercleanup">
-            <module name="Sickdaflip_CustomerCleanup"/>
+            <module name="FlipDev_CustomerCleanup"/>
         </route>
     </router>
 </config>

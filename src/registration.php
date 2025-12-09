@@ -1,7 +1,7 @@
 <?php
 /**
- * Sickdaflip CustomerCleanup Module Registration
- * 
+ * FlipDev CustomerCleanup Module Registration
+ *
  * Handles customer data cleanup and GDPR compliance
  */
 
@@ -9,6 +9,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Sickdaflip_CustomerCleanup',
+    'FlipDev_CustomerCleanup',
     __DIR__
 );

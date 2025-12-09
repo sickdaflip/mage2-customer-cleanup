@@ -5,10 +5,10 @@
  */
 declare(strict_types=1);
 
-namespace Sickdaflip\CustomerCleanup\Model\Source;
+namespace FlipDev\CustomerCleanup\Model\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
-use Sickdaflip\CustomerCleanup\Model\CleanupLog;
+use FlipDev\CustomerCleanup\Model\CleanupLog;
 
 class ActionType implements OptionSourceInterface
 {
