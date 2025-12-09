@@ -7,18 +7,24 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="FlipDev_CustomerCleanup::inactive_customers"
-             title="Inactive Customers (Cleanup)"
+        <add id="FlipDev_CustomerCleanup::customercleanup"
+             title="Customer Cleanup"
              module="FlipDev_CustomerCleanup"
              sortOrder="100"
              parent="Magento_Customer::customer"
+             resource="FlipDev_CustomerCleanup::customercleanup"/>
+        <add id="FlipDev_CustomerCleanup::inactive_customers"
+             title="Inactive Customers"
+             module="FlipDev_CustomerCleanup"
+             sortOrder="10"
+             parent="FlipDev_CustomerCleanup::customercleanup"
              action="customercleanup/customer/index"
              resource="FlipDev_CustomerCleanup::cleanup_view"/>
         <add id="FlipDev_CustomerCleanup::cleanup_log"
-             title="Customer Cleanup Log"
+             title="Cleanup Log"
              module="FlipDev_CustomerCleanup"
-             sortOrder="110"
-             parent="Magento_Customer::customer"
+             sortOrder="20"
+             parent="FlipDev_CustomerCleanup::customercleanup"
              action="customercleanup/log/index"
              resource="FlipDev_CustomerCleanup::cleanup_log"/>
     </menu>

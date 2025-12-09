@@ -91,11 +91,10 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="email_template" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="email_template" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Email Template</label>
                     <comment>Email template for deletion warning.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
-                    <backend_model>Magento\Config\Model\Config\Backend\Email\Template</backend_model>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>

@@ -141,7 +141,6 @@
         <column name="website_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
             <settings>
                 <filter>select</filter>
-                <options class="Magento\Store\Model\ResourceModel\Website\Collection"/>
                 <dataType>select</dataType>
                 <label translate="true">Website</label>
             </settings>
