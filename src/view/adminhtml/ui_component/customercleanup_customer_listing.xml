@@ -32,7 +32,7 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Sickdaflip_CustomerCleanup::cleanup_view</aclResource>
+        <aclResource>FlipDev_CustomerCleanup::cleanup_view</aclResource>
         <dataProvider class="Magento\Customer\Ui\Component\DataProvider" name="customercleanup_customer_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>

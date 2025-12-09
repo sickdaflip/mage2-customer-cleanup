@@ -25,7 +25,7 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Sickdaflip_CustomerCleanup::cleanup_log</aclResource>
+        <aclResource>FlipDev_CustomerCleanup::cleanup_log</aclResource>
         <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" 
                       name="customercleanup_log_listing_data_source">
             <settings>
@@ -79,7 +79,7 @@
         <column name="action_type" component="Magento_Ui/js/grid/columns/select">
             <settings>
                 <filter>select</filter>
-                <options class="Sickdaflip\CustomerCleanup\Model\Source\ActionType"/>
+                <options class="FlipDev\CustomerCleanup\Model\Source\ActionType"/>
                 <dataType>select</dataType>
                 <label translate="true">Action Type</label>
             </settings>
