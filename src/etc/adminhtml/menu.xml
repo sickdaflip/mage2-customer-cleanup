@@ -11,6 +11,7 @@
              title="Customer Cleanup"
              module="FlipDev_CustomerCleanup"
              sortOrder="100"
+             parent="Magento_Customer::customer"
              resource="FlipDev_CustomerCleanup::customercleanup"/>
         <add id="FlipDev_CustomerCleanup::inactive_customers"
              title="Inactive Customers"
