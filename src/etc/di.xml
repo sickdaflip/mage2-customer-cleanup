@@ -7,13 +7,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <!-- Virtual Type for Email Template Source Model -->
-    <virtualType name="FlipDev\CustomerCleanup\Model\Config\Source\Email\Template" type="Magento\Config\Model\Config\Source\Email\Template">
-        <arguments>
-            <argument name="origTemplateCode" xsi:type="string">customercleanup_notification_warning</argument>
-        </arguments>
-    </virtualType>
-
     <!-- Virtual Types for UI Components -->
     <virtualType name="FlipDevCustomerCleanupCustomerGridCollection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">

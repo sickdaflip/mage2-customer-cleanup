@@ -110,10 +110,17 @@
             </settings>
         </column>
         
-        <column name="name" class="Magento\Customer\Ui\Component\Listing\Column\FullName">
+        <column name="firstname">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Name</label>
+                <label translate="true">First Name</label>
+            </settings>
+        </column>
+
+        <column name="lastname">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Last Name</label>
             </settings>
         </column>
         
@@ -141,24 +148,24 @@
             </settings>
         </column>
         
-        <column name="website_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
+        <column name="website_id" component="Magento_Ui/js/grid/columns/select">
             <settings>
                 <filter>select</filter>
+                <options class="Magento\Customer\Model\Customer\Source\Website"/>
                 <dataType>select</dataType>
                 <label translate="true">Website</label>
             </settings>
         </column>
         
-        <column name="confirmation" class="Magento\Customer\Ui\Component\Listing\Column\Confirmation">
+        <column name="confirmation">
             <settings>
-                <filter>select</filter>
-                <options class="Magento\Customer\Ui\Component\Listing\Column\Confirmation\Options"/>
-                <dataType>select</dataType>
-                <label translate="true">Confirmed email</label>
+                <filter>text</filter>
+                <label translate="true">Email Confirmed</label>
+                <visible>false</visible>
             </settings>
         </column>
-        
-        <actionsColumn name="actions" class="Magento\Customer\Ui\Component\Listing\Column\Actions">
+
+        <actionsColumn name="actions" class="Magento\Customer\Ui\Component\Listing\Column\InlineActions">
             <settings>
                 <indexField>entity_id</indexField>
             </settings>

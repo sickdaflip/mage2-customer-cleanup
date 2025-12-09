@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Adminhtml Dependency Injection Configuration
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Virtual Type for Email Template Source Model (Admin only) -->
+    <virtualType name="FlipDev\CustomerCleanup\Model\Config\Source\Email\Template" type="Magento\Config\Model\Config\Source\Email\Template">
+        <arguments>
+            <argument name="origTemplateCode" xsi:type="string">customercleanup_notification_warning</argument>
+        </arguments>
+    </virtualType>
+</config>
