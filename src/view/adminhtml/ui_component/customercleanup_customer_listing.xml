@@ -122,6 +122,14 @@
             </settings>
         </column>
 
+        <column name="last_login_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Last Login</label>
+                <dataType>date</dataType>
+            </settings>
+        </column>
+
         <column name="website_id">
             <settings>
                 <filter>text</filter>
