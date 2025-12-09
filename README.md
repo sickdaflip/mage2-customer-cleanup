@@ -1,36 +1,42 @@
-# Sickdaflip_CustomerCleanup
+# FlipDev_CustomerCleanup
 
 Magento 2.4.8 module for GDPR/DSGVO-compliant customer data cleanup. Helps merchants manage inactive customers and fulfill the "right to be forgotten" obligations.
 
-> **📦 Module Structure**: This module follows modern PHP package structure with source code in `src/` directory and PSR-4 autoloading.
+> **Module Structure**: This module follows modern PHP package structure with source code in `src/` directory and PSR-4 autoloading.
 
-> **⚡ PHP 8.4 Required**: This module requires PHP 8.4 or higher for optimal performance and security.
+> **PHP 8.4 Required**: This module requires PHP 8.4 or higher for optimal performance and security.
+
+## Requirements
+
+- **PHP**: 8.4 or higher
+- **Magento**: 2.4.8 or compatible version
+- **Dependency**: FlipDev_Core module (required)
 
 ## Features
 
-- ✅ **Flexible Cleanup Criteria**
+- **Flexible Cleanup Criteria**
   - Customers without orders after X days
   - Customers inactive (no login) for X days
   - Customers with last order older than X years (minimum 10 for legal compliance)
   - Customers who never logged in
 
-- ✅ **Email Notifications**
+- **Email Notifications**
   - Send warning emails before deletion
   - Configurable warning period
   - Customizable email templates
 
-- ✅ **Data Protection**
+- **Data Protection**
   - Dry run mode for testing
   - Order anonymization instead of deletion (for legal compliance)
   - Comprehensive audit logging
 
-- ✅ **Security & Permissions**
+- **Security & Permissions**
   - Granular ACL (Access Control Lists)
   - Separate permissions for view, delete, notify, and configure
   - All actions logged with admin username
   - Role-based access control
 
-- ✅ **Admin Interface**
+- **Admin Interface**
   - Grid view of inactive customers
   - Mass actions (delete, send notifications)
   - Cleanup log with full history
@@ -39,65 +45,46 @@ Magento 2.4.8 module for GDPR/DSGVO-compliant customer data cleanup. Helps merch
 
 ## Installation
 
-### Requirements
-- **PHP**: 8.4 or higher
-- **Magento**: 2.4.8 or compatible version
-- **Extensions**: Standard Magento requirements
+### Option 1: Composer Installation (Recommended)
 
-### Option 1: Manual Installation
+```bash
+composer require sickdaflip/mage2-customer-cleanup
+bin/magento module:enable FlipDev_CustomerCleanup
+bin/magento setup:upgrade
+bin/magento setup:di:compile
+bin/magento cache:flush
+```
 
-1. Copy the module to `app/code/Sickdaflip/CustomerCleanup`
-   ```bash
-   # Extract the module
-   unzip Sickdaflip_CustomerCleanup.zip
-   
-   # Copy to Magento
-   cp -r Sickdaflip_CustomerCleanup app/code/Sickdaflip/
-   ```
+### Option 2: Manual Installation
 
+1. Copy the module to your Magento installation
 2. Enable the module:
    ```bash
-   php bin/magento module:enable Sickdaflip_CustomerCleanup
-   php bin/magento setup:upgrade
-   php bin/magento setup:di:compile
-   php bin/magento setup:static-content:deploy
-   php bin/magento cache:flush
+   bin/magento module:enable FlipDev_CustomerCleanup
+   bin/magento setup:upgrade
+   bin/magento setup:di:compile
+   bin/magento cache:flush
    ```
 
-### Option 2: Composer Installation
+### After Installation/Update
 
-1. Add to your composer.json repositories section (if not using Packagist):
-   ```json
-   {
-       "repositories": [
-           {
-               "type": "path",
-               "url": "packages/sickdaflip/module-customercleanup"
-           }
-       ]
-   }
-   ```
+Always run these commands after installing or updating the module:
 
-2. Require the module:
-   ```bash
-   composer require sickdaflip/module-customercleanup:^1.0
-   php bin/magento module:enable Sickdaflip_CustomerCleanup
-   php bin/magento setup:upgrade
-   php bin/magento setup:di:compile
-   php bin/magento setup:static-content:deploy
-   php bin/magento cache:flush
-   ```
+```bash
+bin/magento setup:upgrade
+bin/magento setup:di:compile
+bin/magento cache:clean
+bin/magento cache:flush
+```
 
 ## Uninstallation
 
 To completely remove the module and all its data:
 
 ```bash
-php bin/magento module:uninstall Sickdaflip_CustomerCleanup
-# OR manually:
-php bin/magento module:disable Sickdaflip_CustomerCleanup
-php bin/magento setup:upgrade
-# Then remove the module directory
+bin/magento module:disable FlipDev_CustomerCleanup
+bin/magento setup:upgrade
+# Then remove the module via composer or manually
 ```
 
 The uninstall process will:
@@ -105,7 +92,7 @@ The uninstall process will:
 - Remove all module configuration from `core_config_data`
 - Clean up all module data
 
-## 🔒 Safety Features
+## Safety Features
 
 ### Triple-Layer Safety System
 
@@ -135,38 +122,38 @@ The uninstall process will:
 
 When you open the module in admin, you'll see:
 
-- **🔒 Module DISABLED**: Gray banner - Nothing will happen
-- **🧪 DRY RUN MODE**: Yellow banner - Safe testing mode, only logging
-- **⚠️ LIVE MODE**: Red pulsing banner - Real operations, deletions will occur!
+- **Module DISABLED**: Gray banner - Nothing will happen
+- **DRY RUN MODE**: Yellow banner - Safe testing mode, only logging
+- **LIVE MODE**: Red pulsing banner - Real operations, deletions will occur!
 
 ## Configuration
 
-Navigate to: **Stores > Configuration > Sickdaflip > Customer Cleanup**
+Navigate to: **Stores > Configuration > FlipDev > Customer Cleanup**
 
-### ⚠️ Configuration Best Practices
+### Configuration Best Practices
 
 **STEP 1: Initial Setup (SAFE)**
-- ✅ Keep "Enable Module" = NO
-- ✅ Keep "Dry Run Mode" = YES  
-- ✅ Keep "Enable Email Notifications" = NO
+- Keep "Enable Module" = NO
+- Keep "Dry Run Mode" = YES
+- Keep "Enable Email Notifications" = NO
 - Configure your cleanup criteria
 
 **STEP 2: Testing Phase**
-- ✅ Enable Module = YES
-- ✅ Keep "Dry Run Mode" = YES (still safe!)
+- Enable Module = YES
+- Keep "Dry Run Mode" = YES (still safe!)
 - Test mass actions in admin
 - Review cleanup logs to see what would happen
 
 **STEP 3: Email Testing (Optional)**
-- ✅ Enable "Email Notifications" = YES
-- ✅ Keep "Dry Run Mode" = YES (no real emails!)
+- Enable "Email Notifications" = YES
+- Keep "Dry Run Mode" = YES (no real emails!)
 - Test email notifications
 - Check logs for email simulation entries
 
 **STEP 4: Production Use (CAREFUL!)**
-- ⚠️ Set "Dry Run Mode" = NO
-- ⚠️ Make a full database backup first!
-- ⚠️ Test on staging environment first!
+- Set "Dry Run Mode" = NO
+- Make a full database backup first!
+- Test on staging environment first!
 - Start with small batches
 
 ### General Settings
@@ -192,7 +179,7 @@ Navigate to: **Stores > Configuration > Sickdaflip > Customer Cleanup**
 
 ## Usage
 
-### Setting Up Permissions (IMPORTANT!)
+### Setting Up Permissions
 
 The module uses granular ACL (Access Control Lists) to control who can do what.
 
@@ -200,17 +187,15 @@ The module uses granular ACL (Access Control Lists) to control who can do what.
 
 **Available Permissions:**
 - **View Inactive Customers** - Access to customer grid (read-only)
-- **Delete Customers** - Execute deletion operations ⚠️
+- **Delete Customers** - Execute deletion operations
 - **Send Notifications** - Send warning emails to customers
 - **View Cleanup Log** - Access audit logs
-- **Customer Cleanup Configuration** - Change module settings ⚠️
+- **Customer Cleanup Configuration** - Change module settings
 
 **Recommended Setup:**
 - Grant "Delete Customers" only to senior staff
 - Grant "Configuration" only to system administrators
 - All operations are logged with admin username
-
-📖 See [ACL_PERMISSIONS.md](ACL_PERMISSIONS.md) for detailed permission documentation.
 
 ### Admin Interface
 
@@ -236,31 +221,31 @@ The module uses granular ACL (Access Control Lists) to control who can do what.
 
 ### Important Notes
 
-🔒 **Safety First Approach**
+**Safety First Approach**
 - Module is disabled by default after installation
 - Dry Run Mode is enabled by default
 - Email notifications are disabled by default
 - Visual status banner shows current mode at all times
 - All operations are logged for audit trail
 
-⚠️ **Always start with Dry Run Mode enabled!**
+**Always start with Dry Run Mode enabled!**
 - Test your configuration thoroughly
 - Review the logs to see what would happen
 - Test on staging environment first
 - Only disable Dry Run when you're confident
 
-⚠️ **Legal Compliance**
+**Legal Compliance**
 - German/EU law requires keeping invoices for 10 years (HGB §257, AO §147)
 - Enable "Anonymize Orders" to comply with retention requirements
 - Orders are kept but customer data is anonymized
 - Consult with a lawyer for specific compliance requirements
 
-⚠️ **Backups**
+**Backups**
 - Always backup your database before mass deletions
 - Test on staging environment first
 - Cannot undo deletions!
 
-📧 **Email Notifications**
+**Email Notifications**
 - Disabled by default
 - In Dry Run Mode: emails are simulated but not sent
 - Check cleanup log to see which customers would receive emails
@@ -269,7 +254,7 @@ The module uses granular ACL (Access Control Lists) to control who can do what.
 ## File Structure
 
 ```
-Sickdaflip_CustomerCleanup/
+FlipDev_CustomerCleanup/
 ├── src/                                   # Source code directory
 │   ├── Api/
 │   │   └── Data/
@@ -281,8 +266,8 @@ Sickdaflip_CustomerCleanup/
 │   │   └── Adminhtml/
 │   │       ├── Customer/
 │   │       │   ├── Index.php
-│   │       │   ├── MassDelete.php         # With safety checks
-│   │       │   └── MassNotify.php         # With safety checks
+│   │       │   ├── MassDelete.php
+│   │       │   └── MassNotify.php
 │   │       └── Log/
 │   │           └── Index.php
 │   ├── etc/
@@ -292,9 +277,10 @@ Sickdaflip_CustomerCleanup/
 │   │   ├── email_templates.xml
 │   │   ├── module.xml
 │   │   └── adminhtml/
+│   │       ├── di.xml                     # Admin-specific DI
 │   │       ├── menu.xml
 │   │       ├── routes.xml
-│   │       └── system.xml                 # Enhanced with warnings
+│   │       └── system.xml
 │   ├── Helper/
 │   │   └── Config.php
 │   ├── Logger/
@@ -314,14 +300,14 @@ Sickdaflip_CustomerCleanup/
 │   │   └── NotificationService.php
 │   ├── Setup/
 │   │   ├── InstallSchema.php
-│   │   └── Uninstall.php                  # Clean uninstall
+│   │   └── Uninstall.php
 │   ├── view/
 │   │   ├── adminhtml/
 │   │   │   ├── layout/
 │   │   │   │   ├── customercleanup_customer_index.xml
 │   │   │   │   └── customercleanup_log_index.xml
 │   │   │   ├── templates/
-│   │   │   │   └── status_banner.phtml   # Warning banner template
+│   │   │   │   └── status_banner.phtml
 │   │   │   └── ui_component/
 │   │   │       ├── customercleanup_customer_listing.xml
 │   │   │       └── customercleanup_log_listing.xml
@@ -329,19 +315,14 @@ Sickdaflip_CustomerCleanup/
 │   │       └── email/
 │   │           └── warning.html
 │   └── registration.php
-├── composer.json                          # PHP 8.4+ required
-├── LICENSE                                # Proprietary license
-├── README.md                              # This file
-├── INSTALL.md                             # Detailed installation guide
-├── CHANGELOG.md                           # Version history
-├── SAFETY_GUIDE.md                        # Safety and testing guide
-├── ACL_PERMISSIONS.md                     # Permission documentation
-└── .gitignore                             # Git ignore rules
+├── composer.json
+├── LICENSE
+└── README.md
 ```
 
 ## Database Tables
 
-### sickdaflip_customer_cleanup_log
+### flipdev_customer_cleanup_log
 Stores all cleanup operations for audit purposes:
 - log_id (primary key)
 - customer_id
@@ -365,9 +346,42 @@ Stores all cleanup operations for audit purposes:
 ### Extending Cleanup Criteria
 You can extend `CustomerFilterService` to add custom cleanup criteria.
 
-## Support & Contributing
+## Troubleshooting
 
-For issues, improvements, or questions, please contact the development team.
+### Common Issues
+
+**"Email template is not defined" error:**
+- Clear all caches: `bin/magento cache:flush`
+- Recompile DI: `bin/magento setup:di:compile`
+
+**"get_parent_class()" TypeError:**
+- Clear generated code: `rm -rf generated/code/*`
+- Recompile DI: `bin/magento setup:di:compile`
+- Clear caches: `bin/magento cache:flush`
+
+**Grid not loading:**
+- Clear caches and recompile DI
+- Check var/log files for specific errors
+
+### Cache Commands
+
+```bash
+# Clear all caches
+bin/magento cache:flush
+
+# Recompile DI
+bin/magento setup:di:compile
+
+# Clear generated code (if needed)
+rm -rf generated/code/*
+
+# Full refresh
+bin/magento setup:upgrade && bin/magento setup:di:compile && bin/magento cache:flush
+```
+
+## Support
+
+For issues, improvements, or questions, please create an issue on GitHub.
 
 ## License
 
@@ -379,18 +393,13 @@ Proprietary - All rights reserved
 - Initial release
 - Multi-criteria customer cleanup
 - Email notifications
-- **Triple-layer safety system:**
-  - Module disabled by default
-  - Dry run mode enabled by default
-  - Email notifications disabled by default
-- **Visual warning system** with status banner
+- Triple-layer safety system
+- Visual warning system with status banner
 - Order anonymization for legal compliance
 - Comprehensive logging
 - Admin UI with grids and mass actions
 - Clean uninstall process
-- Enhanced safety checks in controllers
-- Prominent warnings in admin interface
 
 ## Credits
 
-Developed by Sickdaflip for Magento 2.4.8
+Developed by FlipDev for Magento 2.4.8
