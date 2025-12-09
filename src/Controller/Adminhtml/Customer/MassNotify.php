@@ -21,7 +21,7 @@ class MassNotify extends Action
     /**
      * Authorization level - requires explicit permission to send notifications
      */
-    const ADMIN_RESOURCE = 'Sickdaflip_CustomerCleanup::cleanup_notify';
+    const ADMIN_RESOURCE = 'FlipDev_CustomerCleanup::cleanup_notify';
 
     /**
      * @var Filter
@@ -84,7 +84,7 @@ class MassNotify extends Action
         // SAFETY CHECK: Module must be explicitly enabled
         if (!$this->config->isEnabled()) {
             $this->messageManager->addErrorMessage(
-                __('Customer Cleanup module is DISABLED in configuration. Please enable it first in Stores > Configuration > Sickdaflip > Customer Cleanup.')
+                __('Customer Cleanup module is DISABLED in configuration. Please enable it first in Stores > Configuration > FlipDev > Customer Cleanup.')
             );
             return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('*/*/index');
         }
@@ -92,7 +92,7 @@ class MassNotify extends Action
         // SAFETY CHECK: Notifications must be enabled
         if (!$this->config->isNotificationEnabled()) {
             $this->messageManager->addErrorMessage(
-                __('Email notifications are DISABLED in configuration. Please enable them first in Stores > Configuration > Sickdaflip > Customer Cleanup > Email Notification Settings.')
+                __('Email notifications are DISABLED in configuration. Please enable them first in Stores > Configuration > FlipDev > Customer Cleanup > Email Notification Settings.')
             );
             return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('*/*/index');
         }

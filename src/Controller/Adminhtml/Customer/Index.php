@@ -16,7 +16,7 @@ class Index extends Action
     /**
      * Authorization level - requires permission to view cleanup interface
      */
-    const ADMIN_RESOURCE = 'Sickdaflip_CustomerCleanup::cleanup_view';
+    const ADMIN_RESOURCE = 'FlipDev_CustomerCleanup::cleanup_view';
 
     /**
      * @var PageFactory
@@ -45,7 +45,7 @@ class Index extends Action
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Sickdaflip_CustomerCleanup::inactive_customers');
+        $resultPage->setActiveMenu('FlipDev_CustomerCleanup::inactive_customers');
         $resultPage->getConfig()->getTitle()->prepend(__('Inactive Customers'));
 
         return $resultPage;
