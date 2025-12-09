@@ -82,14 +82,14 @@ class StatusBanner extends Template
     public function getStatusMessage(): string
     {
         if (!$this->isModuleEnabled()) {
-            return __('Module is DISABLED - No cleanup operations will be performed');
+            return (string)__('Module is DISABLED - No cleanup operations will be performed');
         }
 
         if ($this->isDryRunMode()) {
-            return __('DRY RUN MODE - All operations are simulated only, NO actual deletions or emails');
+            return (string)__('DRY RUN MODE - All operations are simulated only, NO actual deletions or emails');
         }
 
-        return __('LIVE MODE - All operations will be executed for real!');
+        return (string)__('LIVE MODE - All operations will be executed for real!');
     }
 
     /**

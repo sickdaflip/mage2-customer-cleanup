@@ -23,14 +23,6 @@
                     <!-- Configuration access -->
                     <resource id="FlipDev_CustomerCleanup::config" title="Customer Cleanup Configuration" sortOrder="30"/>
                 </resource>
-                <!-- Add to Stores > Configuration ACL -->
-                <resource id="Magento_Backend::stores">
-                    <resource id="Magento_Backend::stores_settings">
-                        <resource id="Magento_Config::config">
-                            <resource id="FlipDev_CustomerCleanup::config" title="Customer Cleanup Section"/>
-                        </resource>
-                    </resource>
-                </resource>
             </resource>
         </resources>
     </acl>

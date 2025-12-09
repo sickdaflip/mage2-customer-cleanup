@@ -11,6 +11,7 @@
              title="Customer Cleanup"
              module="FlipDev_CustomerCleanup"
              sortOrder="100"
+             parent="Magento_Customer::customer"
              resource="FlipDev_CustomerCleanup::customercleanup"/>
         <add id="FlipDev_CustomerCleanup::inactive_customers"
              title="Inactive Customers"
@@ -26,12 +27,5 @@
              parent="FlipDev_CustomerCleanup::customercleanup"
              action="customercleanup/log/index"
              resource="FlipDev_CustomerCleanup::cleanup_log"/>
-        <add id="FlipDev_CustomerCleanup::configuration"
-             title="Configuration"
-             module="FlipDev_CustomerCleanup"
-             sortOrder="30"
-             parent="FlipDev_CustomerCleanup::customercleanup"
-             action="adminhtml/system_config/edit/section/customercleanup"
-             resource="FlipDev_CustomerCleanup::config"/>
     </menu>
 </config>

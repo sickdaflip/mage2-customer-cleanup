@@ -16,7 +16,7 @@ class Index extends Action
     /**
      * Authorization level - requires permission to view cleanup logs
      */
-    const ADMIN_RESOURCE = 'Sickdaflip_CustomerCleanup::cleanup_log';
+    const ADMIN_RESOURCE = 'FlipDev_CustomerCleanup::cleanup_log';
 
     /**
      * @var PageFactory
@@ -45,7 +45,7 @@ class Index extends Action
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Sickdaflip_CustomerCleanup::cleanup_log');
+        $resultPage->setActiveMenu('FlipDev_CustomerCleanup::cleanup_log');
         $resultPage->getConfig()->getTitle()->prepend(__('Customer Cleanup Log'));
 
         return $resultPage;

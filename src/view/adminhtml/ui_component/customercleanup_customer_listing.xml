@@ -25,20 +25,23 @@
         </deps>
     </settings>
     
-    <dataSource name="customercleanup_customer_listing_data_source" component="Magento_Ui/js/grid/provider">
-        <settings>
-            <storageConfig>
-                <param name="indexField" xsi:type="string">entity_id</param>
-            </storageConfig>
-            <updateUrl path="mui/index/render"/>
-        </settings>
-        <aclResource>Sickdaflip_CustomerCleanup::cleanup_view</aclResource>
-        <dataProvider class="Magento\Customer\Ui\Component\DataProvider" name="customercleanup_customer_listing_data_source">
-            <settings>
-                <requestFieldName>id</requestFieldName>
-                <primaryFieldName>entity_id</primaryFieldName>
-            </settings>
-        </dataProvider>
+    <dataSource name="customercleanup_customer_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">customercleanup_customer_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
     </dataSource>
     
     <listingToolbar name="listing_top">
@@ -141,7 +144,6 @@
         <column name="website_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
             <settings>
                 <filter>select</filter>
-                <options class="Magento\Store\Model\ResourceModel\Website\Collection"/>
                 <dataType>select</dataType>
                 <label translate="true">Website</label>
             </settings>

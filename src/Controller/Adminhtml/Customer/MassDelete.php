@@ -22,7 +22,7 @@ class MassDelete extends Action
     /**
      * Authorization level - requires explicit permission to delete customers
      */
-    const ADMIN_RESOURCE = 'Sickdaflip_CustomerCleanup::cleanup_delete';
+    const ADMIN_RESOURCE = 'FlipDev_CustomerCleanup::cleanup_delete';
 
     /**
      * @var Filter
@@ -93,7 +93,7 @@ class MassDelete extends Action
         // SAFETY CHECK: Module must be explicitly enabled
         if (!$this->config->isEnabled()) {
             $this->messageManager->addErrorMessage(
-                __('Customer Cleanup module is DISABLED in configuration. Please enable it first in Stores > Configuration > Sickdaflip > Customer Cleanup.')
+                __('Customer Cleanup module is DISABLED in configuration. Please enable it first in Stores > Configuration > FlipDev > Customer Cleanup.')
             );
             return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('*/*/index');
         }

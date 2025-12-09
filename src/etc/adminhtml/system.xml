@@ -7,7 +7,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="customercleanup" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="customercleanup" translate="label" type="text" sortOrder="30" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
             <label>Customer Cleanup</label>
             <tab>flipdev</tab>
             <resource>FlipDev_CustomerCleanup::config</resource>
@@ -90,10 +91,11 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="email_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="email_template" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Email Template</label>
+                    <comment>Email template for deletion warning.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
-                    <comment><![CDATA[Email template for deletion warning. Default: customercleanup_notification_warning]]></comment>
+                    <config_path>customercleanup/notification/email_template</config_path>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>

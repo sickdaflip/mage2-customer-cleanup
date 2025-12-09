@@ -26,7 +26,7 @@ class CleanupLog extends AbstractModel implements CleanupLogInterface
      */
     protected function _construct()
     {
-        $this->_init(\Sickdaflip\CustomerCleanup\Model\ResourceModel\CleanupLog::class);
+        $this->_init(\FlipDev\CustomerCleanup\Model\ResourceModel\CleanupLog::class);
     }
 
     /**

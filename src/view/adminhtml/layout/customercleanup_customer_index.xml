@@ -10,9 +10,9 @@
     <body>
         <referenceContainer name="content">
             <!-- Status Banner showing module mode -->
-            <block class="Sickdaflip\CustomerCleanup\Block\Adminhtml\StatusBanner" 
-                   name="customercleanup.status.banner" 
-                   template="Sickdaflip_CustomerCleanup::status_banner.phtml"
+            <block class="FlipDev\CustomerCleanup\Block\Adminhtml\StatusBanner"
+                   name="customercleanup.status.banner"
+                   template="FlipDev_CustomerCleanup::status_banner.phtml"
                    before="-"/>
             <uiComponent name="customercleanup_customer_listing"/>
         </referenceContainer>
