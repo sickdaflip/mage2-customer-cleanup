@@ -95,6 +95,7 @@
                     <label>Email Template</label>
                     <comment>Email template for deletion warning.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <config_path>customercleanup/notification/email_template</config_path>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
